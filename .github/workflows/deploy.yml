@@ -3,7 +3,7 @@ name: Deploy Auth Backend
 on:
   push:
     branches:
-      - main
+      - master
 
 permissions:
   id-token: write
@@ -11,7 +11,7 @@ permissions:
 
 env:
   AWS_REGION: sa-east-1
-  DOTNET_VERSION: '10.0.x'
+  DOTNET_VERSION: "10.0.x"
 
 jobs:
   test:
@@ -38,8 +38,20 @@ jobs:
       fail-fast: false
       matrix:
         function:
-          - { project: replog-api-auth,       name: replog-api-auth,       handler: replog-api-auth,       memory: 1024, timeout: 30 }
-          - { project: replog-api-authorizer, name: replog-api-authorizer, handler: "replog-api-authorizer::replog_api_authorizer.Function::FunctionHandler", memory: 512, timeout: 10 }
+          - {
+              project: replog-api-auth,
+              name: replog-api-auth,
+              handler: replog-api-auth,
+              memory: 1024,
+              timeout: 30,
+            }
+          - {
+              project: replog-api-authorizer,
+              name: replog-api-authorizer,
+              handler: "replog-api-authorizer::replog_api_authorizer.Function::FunctionHandler",
+              memory: 512,
+              timeout: 10,
+            }
 
     steps:
       - name: Checkout
