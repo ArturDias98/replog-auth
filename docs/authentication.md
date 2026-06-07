@@ -1,6 +1,6 @@
 # Authentication
 
-> **Repository.** The auth service is deployed as a standalone Lambda from the [`replog-auth`](https://github.com/ArturDias98/replog-api-auth) repository. The sync API lives in [`replog-api`](https://github.com/ArturDias98/replog-api). Both Lambdas share the same API Gateway HTTP API (v2).
+> **Repository.** The auth service is deployed as a standalone Lambda from the [`replog-auth`](https://github.com/ArturDias98/replog-auth) repository. The sync API lives in [`replog-api`](https://github.com/ArturDias98/replog-api). Both Lambdas share the same API Gateway HTTP API (v2).
 
 ## Overview
 
