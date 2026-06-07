@@ -1,0 +1,92 @@
+name: Deploy Auth Backend
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  AWS_REGION: sa-east-1
+  DOTNET_VERSION: '10.0.x'
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Run tests
+        run: dotnet test --configuration Release --logger "console;verbosity=normal"
+
+  deploy:
+    name: Build and Deploy ${{ matrix.function.name }}
+    runs-on: ubuntu-latest
+    needs: test
+
+    strategy:
+      fail-fast: false
+      matrix:
+        function:
+          - { project: replog-api-auth,       name: replog-api-auth,       handler: replog-api-auth,       memory: 1024, timeout: 30 }
+          - { project: replog-api-authorizer, name: replog-api-authorizer, handler: "replog-api-authorizer::replog_api_authorizer.Function::FunctionHandler", memory: 512, timeout: 10 }
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Install Amazon.Lambda.Tools
+        run: dotnet tool install -g Amazon.Lambda.Tools
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Package Lambda deployment artifact
+        run: |
+          dotnet lambda package \
+            --project-location ${{ matrix.function.project }} \
+            --configuration Release \
+            --output-package ${{ github.workspace }}/${{ matrix.function.project }}.zip
+
+      - name: Update Lambda configuration
+        run: |
+          aws lambda update-function-configuration \
+            --function-name ${{ matrix.function.name }} \
+            --runtime dotnet10 \
+            --handler "${{ matrix.function.handler }}" \
+            --memory-size ${{ matrix.function.memory }} \
+            --timeout ${{ matrix.function.timeout }}
+          aws lambda wait function-updated \
+            --function-name ${{ matrix.function.name }}
+
+      - name: Deploy Lambda code
+        run: |
+          aws lambda update-function-code \
+            --function-name ${{ matrix.function.name }} \
+            --zip-file fileb://${{ github.workspace }}/${{ matrix.function.project }}.zip
+          aws lambda wait function-updated \
+            --function-name ${{ matrix.function.name }}
+
+      - name: Publish Lambda version
+        run: |
+          aws lambda publish-version \
+            --function-name ${{ matrix.function.name }} \
+            --description "Deployed from ${{ github.sha }}"

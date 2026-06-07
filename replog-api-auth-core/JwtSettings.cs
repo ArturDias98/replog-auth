@@ -1,0 +1,12 @@
+namespace replog_api_auth_core;
+
+public class JwtSettings
+{
+    public required string Secret { get; set; }
+    public string Issuer { get; set; } = "replog-api";
+    public string Audience { get; set; } = "replog-client";
+    public int AccessTokenExpirationMinutes { get; set; } = 15;
+    public int RefreshTokenExpirationDays { get; set; } = 30;
+    public int AccessTokenCookieExpirationDays { get; set; } = 30;
+    public int RefreshTokenCookieExpirationDays { get; set; } = 30;
+}

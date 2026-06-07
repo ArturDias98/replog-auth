@@ -1,0 +1,11 @@
+<Solution>
+  <Project Path="replog-api-auth-core/replog-api-auth-core.csproj" />
+  <Project Path="replog-api-auth.tests/replog-api-auth.tests.csproj" />
+  <Project Path="replog-api-auth/replog-api-auth.csproj" />
+  <Project Path="replog-api-authorizer/replog-api-authorizer.csproj" />
+  <Project Path="replog-api-host/replog-api-host.csproj" />
+  <Project Path="replog-domain/replog-domain.csproj" />
+  <Project Path="replog-infrastructure/replog-infrastructure.csproj" />
+  <Project Path="replog-shared/replog-shared.csproj" />
+  <Project Path="replog-tests-shared/replog-tests-shared.csproj" />
+</Solution>
