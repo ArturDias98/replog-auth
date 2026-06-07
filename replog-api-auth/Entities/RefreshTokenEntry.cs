@@ -1,4 +1,4 @@
-namespace replog_domain.Entities;
+namespace replog_api_auth.Entities;
 
 public class RefreshTokenEntry
 {

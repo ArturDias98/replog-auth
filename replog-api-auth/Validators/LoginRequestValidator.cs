@@ -1,5 +1,5 @@
 using FluentValidation;
-using replog_shared.Models.Requests;
+using replog_api_auth.Models.Requests;
 
 namespace replog_api_auth.Validators;
 

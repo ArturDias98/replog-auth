@@ -2,10 +2,10 @@ using System.Text.Json;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.Model;
 using Microsoft.Extensions.Options;
+using replog_api_auth.Entities;
 using replog_api_auth.Interfaces;
-using replog_domain.Entities;
-using replog_infrastructure.Settings;
-using replog_shared.Json;
+using replog_api_auth.Json;
+using replog_api_auth.Settings;
 
 namespace replog_api_auth.Repositories;
 

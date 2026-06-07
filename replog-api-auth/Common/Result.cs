@@ -1,4 +1,4 @@
-namespace replog_api_auth;
+namespace replog_api_auth.Common;
 
 public class Result<T>
 {

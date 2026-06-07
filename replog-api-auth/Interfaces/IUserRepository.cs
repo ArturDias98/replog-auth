@@ -1,4 +1,4 @@
-using replog_domain.Entities;
+using replog_api_auth.Entities;
 
 namespace replog_api_auth.Interfaces;
 

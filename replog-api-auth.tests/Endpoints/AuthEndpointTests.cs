@@ -2,9 +2,9 @@ using System.Net;
 using System.Net.Http.Json;
 using NSubstitute;
 using replog_api_auth.Auth;
+using replog_api_auth.Models.Requests;
+using replog_api_auth.Models.Responses;
 using replog_api_auth.tests.Fixtures;
-using replog_shared.Models.Requests;
-using replog_shared.Models.Responses;
 
 namespace replog_api_auth.tests.Endpoints;
 

@@ -23,10 +23,6 @@
 
     <ItemGroup>
         <ProjectReference Include="..\replog-api-auth-core\replog-api-auth-core.csproj" />
-        <ProjectReference Include="..\replog-api-host\replog-api-host.csproj" />
-        <ProjectReference Include="..\replog-domain\replog-domain.csproj" />
-        <ProjectReference Include="..\replog-infrastructure\replog-infrastructure.csproj" />
-        <ProjectReference Include="..\replog-shared\replog-shared.csproj" />
     </ItemGroup>
 
 </Project>

@@ -1,8 +1,8 @@
 using Microsoft.Extensions.Options;
 using replog_api_auth.Auth;
+using replog_api_auth.Models.Requests;
+using replog_api_auth.Models.Responses;
 using replog_api_auth_core;
-using replog_shared.Models.Requests;
-using replog_shared.Models.Responses;
 
 namespace replog_api_auth.Endpoints;
 

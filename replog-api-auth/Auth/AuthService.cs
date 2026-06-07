@@ -1,7 +1,8 @@
 using Microsoft.Extensions.Options;
+using replog_api_auth.Common;
+using replog_api_auth.Entities;
 using replog_api_auth.Interfaces;
 using replog_api_auth_core;
-using replog_domain.Entities;
 
 namespace replog_api_auth.Auth;
 

@@ -1,4 +1,4 @@
-using replog_application;
+using replog_api_auth.Common;
 
 namespace replog_api_auth.Auth;
 
